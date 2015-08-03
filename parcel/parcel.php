@@ -42,14 +42,19 @@
   $user_parcel = new Parcel($_GET["weight"],$_GET["height"],$_GET["width"],$_GET["depth"]);
 
 
-
   function volume($user_parcel)
   {
-    $user_height = $user_parcel->GetHeight();
-    $user_width = $user_parcel->GetWidth();
-    $user_depth = $user_parcel->GetDepth();
+    $user_height = $user_parcel->getHeight();
+    $user_width = $user_parcel->getWidth();
+    $user_depth = $user_parcel->getDepth();
+   
+    return $user_height * $user_width * $user_depth;
+  }
 
-    return $user_height * $user_width * $user_depth ;
+  function costToShip($user_parcel)
+  {
+    $user_weight = $user_parcel->getWeight();
+    return ($user_weight * volume($user_parcel))*.1;
   }
 
 ?>
@@ -61,11 +66,16 @@
   <title>Parcel calculator</title>
 </head>
 <body>
-  <h1>The volume of your parcel is:
-    <?php
-      $end_result = volume($user_parcel);
-      echo  $end_result;
+  <?php
+    if((volume($user_parcel) != 0) && (costToShip($user_parcel) != 0))
+    {
+      echo "<h1>The volume of your parcel is: " . number_format(volume($user_parcel)) . "</h1>";
+      echo "<h1>The cost to ship the parcel is: $" . number_format(costToShip($user_parcel), 2) . "</h1>";
+    }
+    else
+    {
+      echo "<h1>Please fill out the form correctly</h1>";
+    }
     ?>
-  </h1>
 </body>
 </html>
