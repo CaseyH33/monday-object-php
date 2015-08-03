@@ -72,9 +72,7 @@
   $cars = array($porsche, $ford, $lexus, $mercedes, $random);
   $cars_matching_search = array();
   foreach ($cars as $car) {
-    $price_data = $car->getPrice();
-    $mileage_data = $car->getMiles();
-    if ( ($price_data <= $_GET["price"]) && ($mileage_data <= $_GET["mileage"]) ) {
+    if ( ($car->getPrice() <= $_GET["price"]) && ($car->getMiles() <= $_GET["mileage"]) ) {
       array_push($cars_matching_search, $car);
     }
   }
@@ -96,14 +94,11 @@
             echo "<ul class='list-unstyled'>";
               foreach ($cars_matching_search as $car) {
                 $model_data = $car->getModel();
-                $price_data = $car->getPrice();
-                $miles_data = $car->getMiles();
-                $image_data = $car->getImage();
                 echo "<li>$model_data</li>";
-                echo "<img src='$image_data' width='25%' height='30%' alt='Image of $model_data'>";
+                echo "<img src='" . $car->getImage() . "' width='25%' height='30%' alt='Image of $model_data'>";
                 echo "<ul>";
-                  echo "<li> $" . number_format($price_data) .  "</li>";
-                  echo "<li> Miles: " . number_format($miles_data) . "</li>";
+                  echo "<li> $" . number_format($car->getPrice()) .  "</li>";
+                  echo "<li> Miles: " . number_format($car->getMiles()) . "</li>";
                 echo "</ul>";
                 echo "<p></p>";
               }
