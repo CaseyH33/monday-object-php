@@ -34,6 +34,7 @@
       $this->image = $image_path;
     }
 
+
     function getModel()
     {
       return $this->make_model;
@@ -41,7 +42,7 @@
 
     function getPrice()
     {
-      return $this->price;
+     return $this->price;
     }
 
     function getMiles()
@@ -83,6 +84,7 @@
 <html>
   <head>
     <title>Ian & Casey's Dealership-O'Rama</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   </head>
   <body>
     <h1>Ian & Casey's Dealership-O'Rama</h1>
@@ -91,7 +93,7 @@
           if(empty($cars_matching_search)){
             echo "<p>We're sorry but no cars match your search</p>";
           } else {
-            echo "<ul>";
+            echo "<ul class='list-unstyled'>";
               foreach ($cars_matching_search as $car) {
                 $model_data = $car->getModel();
                 $price_data = $car->getPrice();
@@ -103,6 +105,7 @@
                   echo "<li> $" . number_format($price_data) .  "</li>";
                   echo "<li> Miles: " . number_format($miles_data) . "</li>";
                 echo "</ul>";
+                echo "<p></p>";
               }
             echo "</ul>";
           }
