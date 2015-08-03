@@ -86,21 +86,27 @@
   </head>
   <body>
     <h1>Ian & Casey's Dealership-O'Rama</h1>
-    <ul>
+
         <?php
-          foreach ($cars_matching_search as $car) {
-            $model_data = $car->getModel();
-            $price_data = $car->getPrice();
-            $miles_data = $car->getMiles();
-            $image_data = $car->getImage();
-            echo "<li>$model_data</li>";
-            echo "<img src='$image_data'>";
+          if(empty($cars_matching_search)){
+            echo "<p>We're sorry but no cars match your search</p>";
+          } else {
             echo "<ul>";
-              echo "<li> $$price_data </li>";
-              echo "<li> Miles:$miles_data</li>";
+              foreach ($cars_matching_search as $car) {
+                $model_data = $car->getModel();
+                $price_data = $car->getPrice();
+                $miles_data = $car->getMiles();
+                $image_data = $car->getImage();
+                echo "<li>$model_data</li>";
+                echo "<img src='$image_data' width='25%' height='30%' alt='Image of $model_data'>";
+                echo "<ul>";
+                  echo "<li> $" . number_format($price_data) .  "</li>";
+                  echo "<li> Miles: " . number_format($miles_data) . "</li>";
+                echo "</ul>";
+              }
             echo "</ul>";
           }
         ?>
-    </ul>
+
   </body>
 </html>
